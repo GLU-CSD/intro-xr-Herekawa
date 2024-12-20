@@ -1,12 +1,16 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
     private bool gameActive = true;
     private int score = 0;
     private float scoreTimer = 0f; // Timer om score te verhogen
+
+    public static readonly HashSet<GameObject> TargetNodes = new HashSet<GameObject>();
+    public static readonly HashSet<GameObject> RangerNodes = new HashSet<GameObject>();
 
     // UI om de score te laten zien
     [SerializeField] private TextMeshProUGUI scoreText;
@@ -17,6 +21,18 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         scoreText.text = "Score: " + score;
+
+        TargetNodes.Clear();
+        RangerNodes.Clear();
+
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("AttackNodeClose"))
+        {
+            TargetNodes.Add(obj);
+        }
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("AttackNodeFar"))
+        {
+            RangerNodes.Add(obj);
+        }
     }
 
     void Update()

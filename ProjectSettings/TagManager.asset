@@ -8,6 +8,9 @@ TagManager:
   - Base
   - Terrain
   - Spawner
+  - AttackNodeClose
+  - AttackNodeFar
+  - TowerSpawn
   layers:
   - Default
   - TransparentFX
@@ -15,7 +18,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Enemy
   - 
   - 
   - 

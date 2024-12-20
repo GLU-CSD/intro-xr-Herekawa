@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-
 using UnityEngine;
 using UnityEngine.UI; // Dit is nodig om Image te gebruiken
 using UnityEngine.AI;
+using Unity.XR.CoreUtils;
 
 
 public class Health : MonoBehaviour
@@ -14,7 +12,10 @@ public class Health : MonoBehaviour
 
     void UpdateHealthBar()
     {
-        healthbarFill.fillAmount = currentHealth / maxHealth;
+        if (healthbarFill != null)
+        {
+            healthbarFill.fillAmount = currentHealth / maxHealth;
+        }
     }
 
     void Start()
@@ -31,7 +32,6 @@ public class Health : MonoBehaviour
             agent.enabled = false;
             Destroy(gameObject);
         }
-        
     }
 
     public void TakeDamage(float amount)

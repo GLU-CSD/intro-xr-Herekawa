@@ -1,26 +1,35 @@
 using UnityEngine;
 
+using Unity.XR.CoreUtils;
+
 public class BaseState : MonoBehaviour
 {
     [SerializeField] private GameManager gameManager;
     [SerializeField] private Health health;
 
-    private void Update() {
+    private void Update()
+    {
         if (health != null)
         {
-            if(gameManager != null)
+            if (gameManager != null)
             {
-                if(health.currentHealth <= 0)
+                if (health.currentHealth <= 0)
                 {
                     gameManager.GameOver();
-                    Destroy(gameObject);
+                    gameObject.GetNamedChild("DestroyedBase").GetComponent<MeshRenderer>().enabled = true;
+                    gameObject.GetNamedChild("HealthyBase").GetComponent<MeshRenderer>().enabled = false;
+
+                    //gameObject.GetNamedChild("HealthyBase").SetActive(false);
+
                 }
-            } else
+            }
+            else
             {
                 Debug.Log("Base has no reference to GameManager");
             }
-            
-        } else 
+
+        }
+        else
         {
             Debug.Log("Base has no reference to Health");
         }
